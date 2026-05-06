@@ -507,6 +507,18 @@ input:disabled {
   grid-template-columns: repeat(8, 1fr);
   gap: 0.5rem;
   margin-bottom: 1rem;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.filament-swatch.rainbow,
+.proposal-swatch.rainbow,
+.color-preview.rainbow,
+.color-preset.rainbow {
+  background: conic-gradient(
+    from 0deg,
+    #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000
+  );
 }
 
 .color-preset {
