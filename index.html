@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Filament Print Cost Calculator</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="app-header">
+  <h1>Filament Print Cost Calculator</h1>
+</header>
+
+<main>
+  <section class="card">
+    <div class="card-head">
+      <h2>Filament Setup</h2>
+      <button id="add-ams-btn" class="btn btn-primary">+ Add AMS</button>
+    </div>
+    <div id="ams-list" class="ams-list"></div>
+
+    <div class="ext-section">
+      <div class="card-head">
+        <h3>External Filament</h3>
+        <button id="toggle-ext-btn" class="btn btn-ghost"></button>
+      </div>
+      <div id="ext-container"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Electricity</h2>
+    <div class="row">
+      <label class="field">
+        <span>Cost per kWh ($)</span>
+        <input type="number" id="kwh-rate" step="0.001" min="0" placeholder="0.15" />
+      </label>
+      <label class="field">
+        <span>Printer</span>
+        <select id="printer-preset"></select>
+      </label>
+      <label class="field">
+        <span>Average wattage (W)</span>
+        <input type="number" id="printer-watts" step="1" min="0" placeholder="125" />
+      </label>
+    </div>
+    <p id="printer-note" class="helper-text"></p>
+  </section>
+
+  <section class="card">
+    <h2>Proposed Print</h2>
+    <div id="proposal-items" class="proposal-items"></div>
+    <button id="add-proposal-item-btn" class="btn btn-secondary">+ Add filament to print</button>
+
+    <div class="row" style="margin-top: 1rem;">
+      <label class="field">
+        <span>Estimated print time (hours)</span>
+        <input type="number" id="print-hours" step="0.1" min="0" placeholder="2.5" />
+      </label>
+    </div>
+
+    <button id="calculate-btn" class="btn btn-primary btn-large">What will it cost?</button>
+
+    <div id="result" class="result hidden"></div>
+  </section>
+
+  <section class="backup-banner">
+    <div class="backup-banner-text">
+      <strong>Need to back up your settings, or move to another browser?</strong>
+      <p>Your filament setup is saved only in this browser's local storage. Export it to a file to keep a backup or move it to a different machine.</p>
+    </div>
+    <button id="open-backup-btn" class="btn btn-secondary">Click Here</button>
+  </section>
+</main>
+
+<div id="color-modal" class="modal hidden" aria-hidden="true">
+  <div class="modal-backdrop" data-action="close-color"></div>
+  <div class="modal-content modal-color" role="dialog" aria-modal="true" aria-labelledby="color-modal-title">
+    <button class="modal-close" data-action="close-color" aria-label="Close">×</button>
+    <h2 id="color-modal-title">Pick a color</h2>
+    <div id="color-preview" class="color-preview"></div>
+    <div class="color-section-label">Presets</div>
+    <div id="color-presets" class="color-presets"></div>
+    <div class="color-inputs">
+      <label class="field-mini">
+        <span>Custom</span>
+        <input type="color" id="color-input" />
+      </label>
+      <label class="field-mini">
+        <span>Hex</span>
+        <input type="text" id="color-hex" maxlength="7" placeholder="#ff0000" />
+      </label>
+    </div>
+    <div class="modal-actions">
+      <button id="color-save" class="btn btn-primary">Save</button>
+      <button class="btn btn-secondary" data-action="close-color">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="backup-modal" class="modal hidden" aria-hidden="true">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="backup-modal-title">
+    <button class="modal-close" data-action="close-modal" aria-label="Close">×</button>
+    <h2 id="backup-modal-title">Backup &amp; Restore</h2>
+    <p>Your filament configuration, electricity settings, and current proposed print are stored only in this browser. They are <em>not</em> uploaded anywhere.</p>
+    <ul class="modal-list">
+      <li><strong>Export JSON</strong> — downloads a file containing everything in this app. Save it for a backup, or copy it to another computer.</li>
+      <li><strong>Import JSON</strong> — loads a previously exported file. <em>This replaces all of your current settings.</em></li>
+    </ul>
+    <div class="modal-actions">
+      <button id="export-btn" class="btn btn-primary">Export JSON</button>
+      <button id="import-btn" class="btn btn-secondary">Import JSON</button>
+      <input type="file" id="import-file" accept="application/json" hidden />
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
