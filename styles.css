@@ -553,6 +553,14 @@ input:disabled {
   .filament-swatch { width: 44px; height: 44px; border-width: 2px; }
   .filament-fields .row { flex-direction: column; gap: 0.5rem; }
   .ext-section { margin-top: 1rem; padding-top: 1rem; }
+  .proposal-item { flex-wrap: wrap; row-gap: 0.5rem; }
+  .proposal-item .proposal-field { flex: 1 1 calc(100% - 44px); }
+  .proposal-item .weight-input { flex: 1; }
   .backup-banner { flex-direction: column; align-items: stretch; }
   .backup-banner button { width: 100%; }
+  input[type="number"], input[type="text"], select { font-size: 16px; }
+  .color-presets { grid-template-columns: repeat(6, 1fr); }
+  .modal-content { padding: 1.25rem; }
+  .result-line { gap: 0.75rem; }
+  .result-line > span:first-child { min-width: 0; flex: 1; }
 }
